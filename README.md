@@ -1,4 +1,4 @@
-# React: *Todo-list*
+# React: _Todo-list_
 
 ToDo-list is an application, creates in **react**, that allows us to organize what we've pending to do.
 
@@ -17,6 +17,7 @@ The list helps us to see what we'll have to do and what we've already finished.
 - Autor
 
 # The Process
+
 ## Built width
 
 Technologies used in the project:

@@ -1,0 +1,15 @@
+
+[
+	{
+		"text": "limpiar la estufa",
+		"state": false
+	},
+	{
+		"text": "Terminar la libreria del lcd 16x2",
+		"state": false
+	},
+	{
+		"text": "Lavar las jergas",
+		"state": true
+	}
+]
