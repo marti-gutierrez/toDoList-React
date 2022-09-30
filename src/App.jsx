@@ -11,25 +11,27 @@ const tasks = [
 	},
 	{
 		text: 'Terminar la libreria del lcd 16x2',
-		state: false,
+		state: true,
 	},
 	{
 		text: 'Lavar las jergas',
-		state: true,
+		state: false,
 	},
 ];
 
 function App() {
 	return (
 		<>
-			<TodoCounter />
 			<TodoSearch />
-			<TodoList>
-				{tasks.map((task, index) => (
-					<TodoItem text={task.text} state={task.state} key={index} />
-				))}
-			</TodoList>
-			<CreateTodoButton />
+			<div className='relative w-full h-5/6 bg-slate-100 rounded-t-2xl'>
+				<TodoCounter />
+				<TodoList>
+					{tasks.map((task, index) => (
+						<TodoItem text={task.text} state={task.state} key={index} />
+					))}
+				</TodoList>
+				<CreateTodoButton />
+			</div>
 		</>
 	);
 }
