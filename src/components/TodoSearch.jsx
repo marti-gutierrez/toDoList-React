@@ -1,9 +1,8 @@
 import { FaGithub } from 'react-icons/fa';
 import { BiSearchAlt } from 'react-icons/bi';
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export function TodoSearch() {
-	const [searchState,setSearchState] = useState('');
+export function TodoSearch({searchState,setSearchState}) {
 	const handleChange = event => {
 		setSearchState(event.target.value);
 	};
@@ -23,7 +22,11 @@ export function TodoSearch() {
 				/>
 				<BiSearchAlt className='absolute top-1 left-0 w-7 h-7 text-slate-50 text-2xl' />
 			</form>
-			<p>{searchState}</p>
 		</div>
 	);
+}
+
+TodoSearch.propTypes = {
+	searchState: PropTypes.string,
+	setSearchState: PropTypes.func
 }
