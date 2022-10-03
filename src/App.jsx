@@ -7,22 +7,37 @@ import { useState } from 'react';
 import json from '../task.json';
 
 function App() {
-	const [tasks, setTasks] = useState(json);
+	const localStorageToDo = localStorage.getItem('ToDo_V1'); // obtener informa
+	let parsedToDo;
+	if (!localStorageToDo) {
+		localStorage.setItem('ToDo_V1', JSON.stringify([]));
+		parsedToDo = [];
+	} else {
+		parsedToDo = JSON.parse(localStorageToDo);
+	}
+
+	const [tasks, setTasks] = useState(parsedToDo);
 	const [searchState, setSearchState] = useState('');
 	let taskFound = [];
-	const completedTasks = tasks.filter(task => task.state).length;
+	const completedTasks = tasks.filter(task => !!task.state).length;
 	const numberTasks = tasks.length;
+
+	const saveToDo = newToDos => {
+		const stringiFiedToDo = JSON.stringify(newToDos);
+		localStorage.setItem('ToDo_V1',stringiFiedToDo);
+		setTasks(newToDos);
+	};
 
 	const completeToDo = index => {
 		const newToDos = [...tasks];
 		newToDos[index].state = !newToDos[index].state;
-		setTasks(newToDos);
+		saveToDo(newToDos);
 	};
 	const deleteToDo = index => {
 		const newToDos = [...tasks];
-		newToDos.splice(index,1);
-		setTasks(newToDos);
-	}
+		newToDos.splice(index, 1);
+		saveToDo(newToDos);
+	};
 
 	taskFound =
 		!searchState >= 1
