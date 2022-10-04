@@ -3,30 +3,56 @@ import { TodoSearch } from './components/TodoSearch';
 import { TodoList } from './components/TodoList';
 import { TodoItem } from './components/TodoItem';
 import { CreateTodoButton } from './components/CreateTodoButton';
-import { useState } from 'react';
-import json from '../task.json';
+import { useState, useEffect } from 'react';
+// import { number } from 'prop-types';
+// import json from '../task.json';
+
+function useLocalStorage(itemName, initialValue) {
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+	const [item, setItem] = useState(initialValue);
+	useEffect(() => {
+		setTimeout(() => {
+			try {
+				const localStorageItem = localStorage.getItem(itemName);
+				let itemParsed;
+				if (!localStorageItem) {
+					localStorage.setItem(itemName, JSON.stringify(initialValue));
+					itemParsed = initialValue;
+				} else {
+					itemParsed = JSON.parse(localStorageItem);
+				}
+				setItem(itemParsed);
+				setLoading(false);
+			} catch (error) {
+				setError(error);
+			}
+		}, 1000);
+	});
+	const saveToDo = newToDos => {
+		try {
+			const stringiFiedToDo = JSON.stringify(newToDos);
+			localStorage.setItem(itemName, stringiFiedToDo);
+			setItem(newToDos);
+		} catch (error) {
+			setError(Error);
+		}
+	};
+	return { item, loading, error, saveToDo };
+}
 
 function App() {
-	const localStorageToDo = localStorage.getItem('ToDo_V1'); // obtener informa
-	let parsedToDo;
-	if (!localStorageToDo) {
-		localStorage.setItem('ToDo_V1', JSON.stringify([]));
-		parsedToDo = [];
-	} else {
-		parsedToDo = JSON.parse(localStorageToDo);
-	}
-
-	const [tasks, setTasks] = useState(parsedToDo);
+	const {
+		item: tasks,
+		loading,
+		error,
+		saveToDo,
+	} = useLocalStorage('ToDo_V1', []);
 	const [searchState, setSearchState] = useState('');
 	let taskFound = [];
 	const completedTasks = tasks.filter(task => !!task.state).length;
 	const numberTasks = tasks.length;
-
-	const saveToDo = newToDos => {
-		const stringiFiedToDo = JSON.stringify(newToDos);
-		localStorage.setItem('ToDo_V1',stringiFiedToDo);
-		setTasks(newToDos);
-	};
+	// const error = false;
 
 	const completeToDo = index => {
 		const newToDos = [...tasks];
@@ -57,6 +83,9 @@ function App() {
 					numberTasks={numberTasks}
 				/>
 				<TodoList>
+					{loading && <p>Estamos cargando, no desesperes ...</p>}
+					{error && <p>Desesperate, hubo un error</p>}
+					{!loading && !numberTasks && <p>hola crea tu primer tarea</p>}
 					{taskFound.map((task, index) => (
 						<TodoItem
 							text={task.text}
