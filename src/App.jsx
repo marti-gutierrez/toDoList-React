@@ -1,11 +1,6 @@
-import { TodoCounter } from './components/TodoCounter';
+import { TodoContainer } from './containers/TodoContainer';
 import { TodoSearch } from './components/TodoSearch';
-import { TodoList } from './components/TodoList';
-import { TodoItem } from './components/TodoItem';
-import { CreateTodoButton } from './components/CreateTodoButton';
 import { useState, useEffect } from 'react';
-// import { number } from 'prop-types';
-// import json from '../task.json';
 
 function useLocalStorage(itemName, initialValue) {
 	const [loading, setLoading] = useState(true);
@@ -77,27 +72,15 @@ function App() {
 	return (
 		<>
 			<TodoSearch searchState={searchState} setSearchState={setSearchState} />
-			<div className='relative w-full h-5/6 bg-slate-100 rounded-t-2xl'>
-				<TodoCounter
-					completedTasks={completedTasks}
-					numberTasks={numberTasks}
-				/>
-				<TodoList>
-					{loading && <p>Estamos cargando, no desesperes ...</p>}
-					{error && <p>Desesperate, hubo un error</p>}
-					{!loading && !numberTasks && <p>hola crea tu primer tarea</p>}
-					{taskFound.map((task, index) => (
-						<TodoItem
-							text={task.text}
-							state={task.state}
-							key={index}
-							onComplete={() => completeToDo(index)}
-							onDelete={() => deleteToDo(index)}
-						/>
-					))}
-				</TodoList>
-				<CreateTodoButton />
-			</div>
+			<TodoContainer
+				completedTasks={completedTasks}
+				numberTasks={numberTasks}
+				taskFound={taskFound}
+				loading={loading}
+				error={error}
+				completeToDo={completeToDo}
+				deleteToDo={deleteToDo}
+			/>
 		</>
 	);
 }
