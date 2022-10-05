@@ -1,8 +1,9 @@
-import { useState} from 'react';
-import {useLocalStorage} from './context/useLocalStorage'
-import AppUI from './container/AppUI';
+import { createContext, useState } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 
-function App() {
+const ToDoContext = createContext();
+
+function ToDoProvider(props) {
 	const {
 		item: tasks,
 		loading,
@@ -36,18 +37,22 @@ function App() {
 			  });
 
 	return (
-		<AppUI
-			searchText={searchState}
-			setSearchState={setSearchState}
-			completedTasks={completedTasks}
-			numberTasks={numberTasks}
-			loading={loading}
-			error={error}
-			taskFound={taskFound}
-			completeToDo={completeToDo}
-			deleteToDo={deleteToDo}
-		/>
+		<ToDoContext.Provider
+			value={{
+        searchState,
+        setSearchState,
+				completedTasks,
+				numberTasks,
+        loading,
+        error,
+        taskFound,
+				completeToDo,
+				deleteToDo,
+			}}
+		>
+			{props.children}
+		</ToDoContext.Provider>
 	);
 }
 
-export default App;
+export { ToDoContext, ToDoProvider };
