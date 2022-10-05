@@ -1,9 +1,10 @@
-import { TodoContainer } from './containers/TodoContainer';
-import { TodoSearch } from './components/TodoSearch';
-import { useState } from 'react';
-import { useLocalStorage } from './context/useLocalStorage';
+import { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useLocalStorage } from './useLocalStorage';
 
-function App() {
+const ToDoContext = createContext();
+
+function ToDoProvider(props) {
 	const {
 		item: tasks,
 		loading,
@@ -35,21 +36,27 @@ function App() {
 					const searchText = searchState.toLowerCase();
 					return toDoText.includes(searchText);
 			  });
-
 	return (
-		<>
-			<TodoSearch searchState={searchState} setSearchState={setSearchState} />
-			<TodoContainer
-				completedTasks={completedTasks}
-				numberTasks={numberTasks}
-				taskFound={taskFound}
-				loading={loading}
-				error={error}
-				completeToDo={completeToDo}
-				deleteToDo={deleteToDo}
-			/>
-		</>
+		<ToDoContext.Provider
+			value={{
+				searchState,
+				setSearchState,
+				completedTasks,
+				numberTasks,
+				taskFound,
+				loading,
+				error,
+				completeToDo,
+				deleteToDo,
+			}}
+		>
+			{props.children}
+		</ToDoContext.Provider>
 	);
 }
 
-export default App;
+export { ToDoProvider };
+
+ToDoProvider.propTypes = {
+	children: PropTypes.element,
+};
