@@ -55,8 +55,8 @@ function ToDoProvider(props) {
 	);
 }
 
-export { ToDoProvider };
+export { ToDoProvider, ToDoContext };
 
 ToDoProvider.propTypes = {
-	children: PropTypes.element,
+	children: PropTypes.arrayOf(PropTypes.element),
 };

@@ -1,26 +1,24 @@
 import PropTypes from 'prop-types';
 import { TodoItem } from '../components/TodoItem';
+import { ToDoContext } from '../context/ToDoContext';
+import { useContext } from 'react';
 
-export function TodoList({
-	taskFound,
-	completeToDo,
-	deleteToDo,
-	loading,
-	error,
-}) {
+export function TodoList() {
+	const { taskFound, loading, error, deleteToDo, completeToDo } =
+		useContext(ToDoContext);
 	return (
 		<>
+			{loading && <p>Estamos cargando, no desesperes ...</p>}
+			{error && <p>Desesperate, hubo un error</p>}
+			{!loading && !taskFound.lenght && <p>hola crea tu primer tarea</p>}
 			<ul className='grid gap-4 w-11/12 mx-auto my-7'>
-				{loading && <p>Estamos cargando, no desesperes ...</p>}
-				{error && <p>Desesperate, hubo un error</p>}
-				{!loading && !taskFound.lenght && <p>hola crea tu primer tarea</p>}
 				{taskFound.forEach((task, index) => {
 					<TodoItem
 						text={task.text}
 						state={task.state}
 						key={index}
-						onComplete={() => completeToDo(index)}
-						onDelete={() => deleteToDo(index)}
+						onComplete={completeToDo}
+						onDelete={deleteToDo}
 					/>;
 				})}
 			</ul>

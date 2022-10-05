@@ -1,8 +1,10 @@
 import { FaGithub } from 'react-icons/fa';
 import { BiSearchAlt } from 'react-icons/bi';
 import PropTypes from 'prop-types';
+import { ToDoContext } from '../context/ToDoContext';
 
-export function TodoSearch({searchState,setSearchState}) {
+export function TodoSearch() {
+	const {searchState,setSearchState} = ToDoContext;
 	const handleChange = event => {
 		setSearchState(event.target.value);
 	};

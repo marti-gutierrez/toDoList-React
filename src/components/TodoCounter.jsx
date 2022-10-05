@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { ToDoContext } from '../context/ToDoContext';
 
-export function TodoCounter({ completedTasks, numberTasks }) {
+export function TodoCounter() {
+	const {completedTasks,numberTasks} = useContext(ToDoContext);
 	return (
 		<section className='flex w-max ml-5 pt-5 pb-1 border-b-2 border-blue-400'>
 			<h2 className=' font-medium'>All tasks</h2>
