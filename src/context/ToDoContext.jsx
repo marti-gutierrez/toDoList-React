@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { useLocalStorage } from './useLocalStorage';
+import PropTypes from 'prop-types'
 
 const ToDoContext = createContext();
 
@@ -56,3 +57,7 @@ function ToDoProvider(props) {
 }
 
 export { ToDoContext, ToDoProvider };
+
+ToDoProvider.propTypes = {
+	children: PropTypes.element
+}

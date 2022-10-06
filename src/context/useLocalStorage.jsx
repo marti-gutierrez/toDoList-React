@@ -21,7 +21,7 @@ export function useLocalStorage(itemName, initialValue) {
 				setError(error);
 			}
 		}, 1000);
-	});
+	},[]);
 	const saveToDo = newToDos => {
 		try {
 			const stringiFiedToDo = JSON.stringify(newToDos);

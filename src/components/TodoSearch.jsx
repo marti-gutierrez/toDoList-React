@@ -1,11 +1,13 @@
 import { FaGithub } from 'react-icons/fa';
 import { BiSearchAlt } from 'react-icons/bi';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { ToDoContext } from '../context/ToDoContext';
 
-export function TodoSearch({searchState,setSearchState}) {
+export function TodoSearch() {
 	const handleChange = event => {
 		setSearchState(event.target.value);
 	};
+	const {searchState,setSearchState} = useContext(ToDoContext);
 	return (
 		<div className='grid gap-5 w-11/12 mx-auto my-8'>
 			<figure className='justify-self-end'>
@@ -24,9 +26,4 @@ export function TodoSearch({searchState,setSearchState}) {
 			</form>
 		</div>
 	);
-}
-
-TodoSearch.propTypes = {
-	searchState: PropTypes.string,
-	setSearchState: PropTypes.func
 }
