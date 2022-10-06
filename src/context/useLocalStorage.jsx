@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function useLocalStorage(itemName, initialValue) {
+export function useLocalStorage(itemName, initialValue) {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(false);
 	const [item, setItem] = useState(initialValue);
@@ -21,7 +21,7 @@ function useLocalStorage(itemName, initialValue) {
 				setError(error);
 			}
 		}, 1000);
-	});
+	},[]);
 	const saveToDo = newToDos => {
 		try {
 			const stringiFiedToDo = JSON.stringify(newToDos);
@@ -33,5 +33,3 @@ function useLocalStorage(itemName, initialValue) {
 	};
 	return { item, loading, error, saveToDo };
 }
-
-export { useLocalStorage };

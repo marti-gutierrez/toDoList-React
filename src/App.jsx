@@ -1,12 +1,10 @@
-import { TodoContainer } from './containers/TodoContainer';
-import { TodoSearch } from './components/TodoSearch';
+import AppUI from './container/AppUI';
 import { ToDoProvider } from './context/ToDoContext';
 
 function App() {
 	return (
 		<ToDoProvider>
-			<TodoSearch />
-			<TodoContainer />
+			<AppUI />
 		</ToDoProvider>
 	);
 }

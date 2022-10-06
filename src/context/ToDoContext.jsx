@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
-import PropTypes from 'prop-types';
 import { useLocalStorage } from './useLocalStorage';
+import PropTypes from 'prop-types'
 
 const ToDoContext = createContext();
 
@@ -36,16 +36,17 @@ function ToDoProvider(props) {
 					const searchText = searchState.toLowerCase();
 					return toDoText.includes(searchText);
 			  });
+
 	return (
 		<ToDoContext.Provider
 			value={{
-				searchState,
-				setSearchState,
+        searchState,
+        setSearchState,
 				completedTasks,
 				numberTasks,
-				taskFound,
-				loading,
-				error,
+        loading,
+        error,
+        taskFound,
 				completeToDo,
 				deleteToDo,
 			}}
@@ -55,8 +56,8 @@ function ToDoProvider(props) {
 	);
 }
 
-export { ToDoProvider, ToDoContext };
+export { ToDoContext, ToDoProvider };
 
 ToDoProvider.propTypes = {
-	children: PropTypes.arrayOf(PropTypes.element),
-};
+	children: PropTypes.element
+}
