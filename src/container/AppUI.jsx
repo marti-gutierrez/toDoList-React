@@ -6,6 +6,7 @@ import { CreateTodoButton } from '../components/CreateTodoButton.jsx';
 import Modal from '../components/Modal';
 import { useContext } from 'react';
 import { ToDoContext } from '../context/ToDoContext';
+import ToDoForm from '../components/ToDoForm';
 
 export default function AppUI() {
 	const {
@@ -37,7 +38,11 @@ export default function AppUI() {
 						/>
 					))}
 				</TodoList>
-				{!!openModal && <Modal setOpenModal={setOpenModal} />}
+				{!!openModal && (
+					<Modal>
+						<ToDoForm />
+					</Modal>
+				)}
 				<CreateTodoButton setOpenModal={setOpenModal} />
 			</div>
 		</>

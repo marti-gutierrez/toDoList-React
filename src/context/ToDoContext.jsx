@@ -18,6 +18,14 @@ function ToDoProvider(props) {
 	const numberTasks = tasks.length;
 	// const error = false;
 
+	const addToDo = text => {
+		const newToDos = [...tasks];
+		newToDos.push({
+			text,
+			state: false,
+		});
+		saveToDo(newToDos);
+	};
 	const completeToDo = index => {
 		const newToDos = [...tasks];
 		newToDos[index].state = !newToDos[index].state;
@@ -48,10 +56,11 @@ function ToDoProvider(props) {
 				loading,
 				error,
 				taskFound,
+				addToDo,
 				completeToDo,
 				deleteToDo,
 				openModal,
-				setOpenModal
+				setOpenModal,
 			}}
 		>
 			{props.children}

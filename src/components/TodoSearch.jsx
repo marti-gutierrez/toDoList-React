@@ -9,7 +9,7 @@ export function TodoSearch() {
 	};
 	const {searchState,setSearchState} = useContext(ToDoContext);
 	return (
-		<div className='grid gap-5 w-11/12 mx-auto my-8'>
+		<div className='grid gap-5 w-11/12 max-w-4xl mx-auto my-8'>
 			<figure className='justify-self-end'>
 				<FaGithub className='w-8 h-8' />
 			</figure>
