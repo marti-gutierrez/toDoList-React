@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const ToDoContext = createContext();
 
@@ -12,6 +12,7 @@ function ToDoProvider(props) {
 		saveToDo,
 	} = useLocalStorage('ToDo_V1', []);
 	const [searchState, setSearchState] = useState('');
+	const [openModal, setOpenModal] = useState(false);
 	let taskFound = [];
 	const completedTasks = tasks.filter(task => !!task.state).length;
 	const numberTasks = tasks.length;
@@ -40,15 +41,17 @@ function ToDoProvider(props) {
 	return (
 		<ToDoContext.Provider
 			value={{
-        searchState,
-        setSearchState,
+				searchState,
+				setSearchState,
 				completedTasks,
 				numberTasks,
-        loading,
-        error,
-        taskFound,
+				loading,
+				error,
+				taskFound,
 				completeToDo,
 				deleteToDo,
+				openModal,
+				setOpenModal
 			}}
 		>
 			{props.children}
@@ -59,5 +62,5 @@ function ToDoProvider(props) {
 export { ToDoContext, ToDoProvider };
 
 ToDoProvider.propTypes = {
-	children: PropTypes.element
-}
+	children: PropTypes.element,
+};
