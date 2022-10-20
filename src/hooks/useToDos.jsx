@@ -1,10 +1,9 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { useLocalStorage } from './useLocalStorage';
-import PropTypes from 'prop-types';
 
-const ToDoContext = createContext();
+// const ToDoContext = createContext();
 
-function ToDoProvider(props) {
+function useToDos() {
 	const {
 		item: tasks,
 		loading,
@@ -46,30 +45,20 @@ function ToDoProvider(props) {
 					return toDoText.includes(searchText);
 			  });
 
-	return (
-		<ToDoContext.Provider
-			value={{
-				searchState,
-				setSearchState,
-				completedTasks,
-				numberTasks,
-				loading,
-				error,
-				taskFound,
-				addToDo,
-				completeToDo,
-				deleteToDo,
-				openModal,
-				setOpenModal,
-			}}
-		>
-			{props.children}
-		</ToDoContext.Provider>
-	);
+	return {
+		searchState,
+		setSearchState,
+		completedTasks,
+		numberTasks,
+		loading,
+		error,
+		taskFound,
+		addToDo,
+		completeToDo,
+		deleteToDo,
+		openModal,
+		setOpenModal,
+	};
 }
 
-export { ToDoContext, ToDoProvider };
-
-ToDoProvider.propTypes = {
-	children: PropTypes.element,
-};
+export { useToDos };

@@ -1,10 +1,9 @@
 import { FaTimes } from 'react-icons/fa';
-import { useContext, useState } from 'react';
-import { ToDoContext } from '../context/ToDoContext';
+import {  useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function ToDoForm() {
+export default function ToDoForm({setOpenModal, addToDo}) {
 	const [newTaskValue, setNewTaskValue] = useState('');
-	const { setOpenModal, addToDo } = useContext(ToDoContext);
 	const onCloseModal = () => setOpenModal(false);
 	const onWriteChange = event => setNewTaskValue(event.target.value);
 	const onSubmit = event => {
@@ -51,4 +50,9 @@ export default function ToDoForm() {
 			</div>
 		</div>
 	);
+}
+
+ToDoForm.propTypes = {
+	setOpenModal: PropTypes.func,
+	addToDo: PropTypes.func
 }
