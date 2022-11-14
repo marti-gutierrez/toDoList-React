@@ -9,6 +9,7 @@ function useToDos() {
 		loading,
 		error,
 		saveToDo,
+		sincronizeTask: sincronizeToDo,
 	} = useLocalStorage('ToDo_V1', []);
 	const [searchState, setSearchState] = useState('');
 	const [openModal, setOpenModal] = useState(false);
@@ -58,6 +59,7 @@ function useToDos() {
 		deleteToDo,
 		openModal,
 		setOpenModal,
+		sincronizeToDo,
 	};
 }
 

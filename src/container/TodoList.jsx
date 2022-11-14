@@ -21,7 +21,7 @@ export function TodoList({
 			{!loading && !numberTasks && onEmptyToDo()}
 			{numberTasks && !taskFound.length && onEmptySearchResult(searchText)}
 			<ul className='grid gap-4 w-11/12 mx-auto my-7'>
-				{taskFound.map(renderFunc)}
+				{!loading && !error && taskFound.map(renderFunc)}
 			</ul>
 		</section>
 	);

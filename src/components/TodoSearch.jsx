@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types';
 
 export function TodoSearch({ searchState, setSearchState }) {
-	const handleChange = event => {
-		setSearchState(event.target.value);
-	};
+	const handleChange = event => setSearchState(event.target.value);
 	return (
 		<input
 			type='text'
