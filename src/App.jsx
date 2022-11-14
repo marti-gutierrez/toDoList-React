@@ -12,7 +12,7 @@ import ToDoMain from './container/ToDoMain';
 import ToDoError from './components/ToDoError';
 import ToDoLoading from './components/ToDoLoading';
 import EmptyToDos from './components/EmptyToDos';
-import { ChangeAlertWithStorageListener } from './hoc/ChangeAlert';
+import ChangeAlert from './components/ChangeAlert';
 
 function App() {
 	const {
@@ -28,7 +28,7 @@ function App() {
 		setSearchState,
 		setOpenModal,
 		addToDo,
-		sincronizeToDo
+		sincronizeToDo,
 	} = useToDos();
 	return (
 		<>
@@ -69,7 +69,7 @@ function App() {
 					</Modal>
 				)}
 				<CreateTodoButton setOpenModal={setOpenModal} />
-				<ChangeAlertWithStorageListener sincronize={sincronizeToDo}/>
+				<ChangeAlert sincronize={sincronizeToDo} />
 			</ToDoMain>
 		</>
 	);

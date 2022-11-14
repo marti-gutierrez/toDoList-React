@@ -1,8 +1,8 @@
-import withStorageListener from './withStorageListener';
+import useStorageListener from '../hooks/useStorageListener';
 import { AiOutlineWarning, AiOutlineReload } from 'react-icons/ai';
-import PropTypes from 'prop-types';
 
-function ChangeAlert({ show, toggleShow }) {
+export default function ChangeAlert({ sincronize }) {
+	const { show, toggleShow } = useStorageListener(sincronize);
 	if (show) {
 		return (
 			<div className='z-10 fixed  top-0 bottom-0 left-0 right-0 grid place-items-center bg-modal '>
@@ -25,12 +25,3 @@ function ChangeAlert({ show, toggleShow }) {
 		return null;
 	}
 }
-
-const ChangeAlertWithStorageListener = withStorageListener(ChangeAlert);
-
-export { ChangeAlertWithStorageListener };
-
-ChangeAlert.propTypes = {
-	show: PropTypes.bool,
-	toggleShow: PropTypes.func,
-};
